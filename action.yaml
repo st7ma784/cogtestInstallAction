@@ -1,0 +1,18 @@
+name: 'Install Cog'
+description: 'Get Cog file'
+inputs:
+  path: 
+    description: "location to install"
+    defaults: "./cog"
+    required: false
+outputs:
+  cogpath:
+    description: "path"
+    value: ${{ inputs.path }}
+runs:
+  using: "composite"
+  steps:
+    - run:  curl -o ${{ inputs.path }}-L https://github.com/replicate/cog/releases/latest/download/cog_`uname -s`_`uname -m`
+      shell: bash
+    - run: chmod +x ${{ inputs.path }}
+      shell: bash
